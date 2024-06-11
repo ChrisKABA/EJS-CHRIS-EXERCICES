@@ -4,12 +4,12 @@ const app = express();
 const articles = require("./data/db.json");
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
-app.use(express.static('public'));
+app.use(express.static(__dirname+'/public'));
 
 app.get("/", (req, res) => {
     res.render("index");
   });
-  
+
   app.get("/contact", (req, res) => {
     res.render("contact");
   });
@@ -33,6 +33,15 @@ app.get("/articles/:slug", (req, res) => {
     
 });
 
+
+app.get("/article/add", (req, res) => {
+  res.render("addArticle");
+});
+
+app.post("/articles", (req, res) =>{//pour 
+
+})
+
 app.get("/*", (req, res, next) => {
     res.render("404");
 });
@@ -43,3 +52,5 @@ app.listen(port, function () {
     console.log(`l'application ecoute sur le port ${port}`);
     console.log(`l'application est disponible sur http://localhost:${port}`);
 });
+
+
