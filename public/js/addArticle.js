@@ -4,7 +4,7 @@ const cloudName = "dgxyauv1s";
 const presetName = "o3uh4aom";
 
 
-https://api.cloudinary.com/v1_1/<CLOUD_NAME>/image/upload
+// https://api.cloudinary.com/v1_1/<CLOUD_NAME>/image/upload
 
 async function uploadImage(image) {
   try {
@@ -25,6 +25,26 @@ async function uploadImage(image) {
   }
 }
 
+async function addArticle(article){
+  try {
+    const response = await fetch("/articles", {
+      method: "POST", 
+      body:JSON.stringify(article),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+
+    if (response.ok) {
+      window.location.href = "/articles"
+    }
+    
+    console.log(response);
+  } catch (error) {
+    
+  }
+}
+
 form.addEventListener("submit", async function (event) {
   event.preventDefault();
   const btnSubmit = event.target.querySelector("#btn-submit");
@@ -37,7 +57,7 @@ form.addEventListener("submit", async function (event) {
   const data = Object.fromEntries(formData.entries());
   data.urlToImage = urlToImage;
   delete data.img;
-  console.log(data);
+  addArticle(data);
   btnSubmit.disabled = false;
   event.target.reset();
 });
